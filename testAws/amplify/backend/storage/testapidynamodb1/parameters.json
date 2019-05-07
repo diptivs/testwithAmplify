@@ -1,0 +1,5 @@
+{
+    "tableName": "testapidynamodb1",
+    "partitionKeyName": "ID",
+    "partitionKeyType": "S"
+}

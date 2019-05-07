@@ -1,0 +1,44 @@
+{
+    "paths": [
+        {
+            "name": "/items",
+            "lambdaFunction": "testapilambda1",
+            "privacy": {
+                "protected": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ],
+                "unauth": [
+                    "/GET"
+                ]
+            }
+        }
+    ],
+    "resourceName": "testapi1",
+    "apiName": "testapi1",
+    "functionArns": [
+        {
+            "lambdaFunction": "testapilambda1"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 1,
+        "authRoleName": "testaws-dev-20190507145204-authRole",
+        "unAuthRoleName": "testaws-dev-20190507145204-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "testapilambda1",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
