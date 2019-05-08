@@ -14,7 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.http.HttpMethodName;
 import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
+import com.amazonaws.mobileconnectors.apigateway.ApiRequest;
+import com.amazonaws.mobileconnectors.apigateway.ApiResponse;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoDevice;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserAttributes;
@@ -30,6 +33,10 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GenericHa
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.SignUpHandler;
 import com.amazonaws.regions.Regions;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
      TestapiClient client;
     private static CognitoUserSession currSession;
     private static CognitoDevice newDevice;
-    private String userName = "";
-    private String userPassword = "";
+    private String userName = "diptivs@gmail.com";
+    private String userPassword = "interOP@123";
 
 
     @Override
@@ -96,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 //userAttributes.addAttribute("phone_number", "1111111111");
 
 // Adding user's email address
-                //userAttributes.addAttribute("email", "dipti@edu");
+                //userAttributes.addAttribute("email", "dipti.shiralkar@sjsu.edu");
                 userPool.signUpInBackground(userName, userPassword, userAttributes, null, signupCallback);
             }
         });
@@ -224,16 +231,40 @@ public class MainActivity extends AppCompatActivity {
 
         // Set up as a credentials provider.
         Map<String, String> logins = new HashMap<String, String>();
-        logins.put("cognito-idp.us-east-1.amazonaws.com/us-east-1_123456678", currSession.getIdToken().getJWTToken());
+        logins.put("cognito-idp.us-west-2.amazonaws.com/us-west-2_7a0XnEarW", currSession.getIdToken().getJWTToken());
         credentialsProvider.setLogins(logins);
 
         Log.d("Dipti","calling client");
-        ApiClientFactory factory = new ApiClientFactory();
+        /*ApiClientFactory factory = new ApiClientFactory();
         factory.credentialsProvider(credentialsProvider);
 // create a client
         client = factory.build(TestapiClient.class);
 
-        client.apiOwnerGet();
+        client.apiOwnerGet();*/
+
+
+        ApiClientFactory factory = new ApiClientFactory();
+        factory.credentialsProvider(credentialsProvider);
+        final TestapiClient client = factory.build(TestapiClient.class);
+
+        ApiRequest request = new ApiRequest();
+        request.withPath("/api/owner");
+        request.withHttpMethod(HttpMethodName.GET);
+        ApiResponse apiResponse = client.execute(request);
+        int responseCode = apiResponse.getStatusCode();
+
+        String responseBody = "empty";
+        try {
+            responseBody   = convertStreamToString(apiResponse.getRawContent());
+        } catch (Exception e){
+            Log.d("ERROR ", " failed reading response ");
+        }
+
+        android.util.Log.v("Request: ", request.toString());
+        android.util.Log.v("response Code: ", String.valueOf(responseCode));
+        android.util.Log.v("response Status Text: ",    apiResponse.getStatusText());
+        android.util.Log.v("responseBody: ", responseBody);
+
         return null;
     }
 
@@ -242,8 +273,30 @@ public class MainActivity extends AppCompatActivity {
         super.onPostExecute(aVoid);
     }
 
+        private String convertStreamToString(InputStream is) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            StringBuilder sb = new StringBuilder();
 
-    @Override
+            String line = null;
+            try {
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line).append('\n');
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return sb.toString();
+        }
+
+
+
+        @Override
     protected void onCancelled()
     {
         super.onCancelled();
