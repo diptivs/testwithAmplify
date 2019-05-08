@@ -15,11 +15,7 @@
 
 package testapi1;
 
-import java.util.*;
-
-
-
-@com.amazonaws.mobileconnectors.apigateway.annotation.Service(endpoint = "https://7btsq774r7.execute-api.us-west-2.amazonaws.com/dev")
+@com.amazonaws.mobileconnectors.apigateway.annotation.Service(endpoint = "https://il71phyykd.execute-api.us-west-2.amazonaws.com/dev")
 public interface TestapiClient {
 
 
@@ -29,22 +25,166 @@ public interface TestapiClient {
      * @return ApiResponse
      */
     com.amazonaws.mobileconnectors.apigateway.ApiResponse execute(com.amazonaws.mobileconnectors.apigateway.ApiRequest request);
-    
+
     /**
-     * 
-     * 
+     *
+     *
      * @return void
      */
-    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/items", method = "OPTIONS")
-    void itemsOptions();
-    
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/config", method = "POST")
+    void apiConfigPost();
+
     /**
-     * 
-     * 
+     *
+     *
      * @return void
      */
-    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/items/{proxy+}", method = "OPTIONS")
-    void itemsProxyOptions();
-    
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/config", method = "OPTIONS")
+    void apiConfigOptions();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/config/{id}", method = "GET")
+    void apiConfigIdGet();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/config/{id}", method = "DELETE")
+    void apiConfigIdDelete();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/config/{id}", method = "OPTIONS")
+    void apiConfigIdOptions();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/data", method = "POST")
+    void apiDataPost();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/data", method = "OPTIONS")
+    void apiDataOptions();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/data/{id}", method = "GET")
+    void apiDataIdGet();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/data/{id}", method = "DELETE")
+    void apiDataIdDelete();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/data/{id}", method = "OPTIONS")
+    void apiDataIdOptions();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/history", method = "POST")
+    void apiHistoryPost();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/history", method = "OPTIONS")
+    void apiHistoryOptions();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/history/{id}", method = "GET")
+    void apiHistoryIdGet();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/history/{id}", method = "DELETE")
+    void apiHistoryIdDelete();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/history/{id}", method = "OPTIONS")
+    void apiHistoryIdOptions();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/owner", method = "GET")
+    void apiOwnerGet();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/owner", method = "PUT")
+    void apiOwnerPut();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/owner", method = "POST")
+    void apiOwnerPost();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/owner", method = "DELETE")
+    void apiOwnerDelete();
+
+    /**
+     *
+     *
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/api/owner", method = "OPTIONS")
+    void apiOwnerOptions();
+
 }
 
